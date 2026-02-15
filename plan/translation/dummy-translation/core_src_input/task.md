@@ -1,0 +1,21 @@
+# Task: Translate core/src/input.rs
+
+## Description
+Translate the Rust file `core/src/input.rs` to C++ without checking anything initially.
+
+## Source File
+```
+/home/sblo/Dev/RuffleCpp/core/src/input.rs
+```
+
+## Translation Notes
+- Direct translation from Rust to C++
+- Maintain original functionality
+- Use wxWidgets for GUI components
+- Handle memory management appropriately
+- Map Rust types to equivalent C++ types
+
+## Status
+- [ ] Translation started
+- [ ] Translation completed
+- [ ] Basic compilation achieved
