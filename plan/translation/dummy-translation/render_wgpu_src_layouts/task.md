@@ -15,7 +15,13 @@ Translate the Rust file `render/wgpu/src/layouts.rs` to C++ without checking any
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated BindLayouts class with 6 bind group layout pointers
+- Added layouts for: globals, transforms, bitmap, gradient, blend, alpha_mask
+- Implemented getter methods for each layout type
+- Added create method for initializing all layouts from a device
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved

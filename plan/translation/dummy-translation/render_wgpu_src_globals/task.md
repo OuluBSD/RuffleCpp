@@ -15,7 +15,13 @@ Translate the Rust file `render/wgpu/src/globals.rs` to C++ without checking any
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated GlobalsUniform struct with 4x4 view matrix
+- Implemented constructor that initializes matrix from viewport dimensions
+- Translated Globals class for managing wgpu bind group and buffer
+- Added helper methods for accessing bind_group and buffer
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
