@@ -16,6 +16,18 @@ Translate the Rust file `frontend-utils/src/bookmarks/write.rs` to C++ without c
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated BookmarksWriter class for TOML bookmark serialization
+- Implemented with_underlying_table() helper for TOML array editing
+- Implemented with_bookmark_table() helper for individual bookmark editing
+- Implemented add() method for adding new bookmarks with duplicate detection
+- Implemented set_content_descriptor() method for updating bookmark URLs
+- Implemented set_name() method for updating bookmark names
+- Implemented remove() method for deleting bookmarks
+- Used parse::DocumentHolder<Bookmarks> for document management
+- Added forward declarations for Bookmark, Bookmarks, ContentDescriptor types
+- Maintained move-to-top behavior for existing entries

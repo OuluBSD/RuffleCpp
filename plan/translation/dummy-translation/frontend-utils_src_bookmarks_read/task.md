@@ -16,6 +16,17 @@ Translate the Rust file `frontend-utils/src/bookmarks/read.rs` to C++ without ch
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated read_bookmarks() function for parsing bookmarks from TOML
+- Implemented INVALID_URL constant for fallback invalid URLs
+- Added parse::ParseDetails return type for parsed results with warnings
+- Used DocumentMut for TOML document parsing
+- Implemented bookmark array parsing with error recovery
+- Added URL parsing with fallback to INVALID_URL on failure
+- Added name fallback using url_to_readable_name() for missing names
+- Included conditional compilation for fs feature (root_content_path)
+- Added forward declarations for Bookmark, Bookmarks, ContentDescriptor, ParseDetails
