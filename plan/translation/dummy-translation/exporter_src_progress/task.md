@@ -16,6 +16,12 @@ Translate the Rust file `exporter/src/progress.rs` to C++ without checking anyth
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated ExporterProgress class with optional progress bar
+- Added constructor taking Opt and files_count parameters
+- Implemented set_message, inc, and finish_with_message methods
+- Used std::optional for conditional progress bar display
