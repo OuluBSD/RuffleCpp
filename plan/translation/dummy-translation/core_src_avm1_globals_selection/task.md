@@ -16,6 +16,16 @@ Translate the Rust file `core/src/avm1/globals/selection.rs` to C++ without chec
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Selection object with OBJECT_DECLS for all methods
+- Implemented create function for Selection singleton with broadcaster initialization
+- Translated get_begin_index, get_end_index, get_caret_index methods for text selection
+- Implemented get_focus method to return focused display object path
+- Implemented set_focus method to set focus to display object
+- Translated set_selection method to set selection range in text field
+- Used forward declarations for EditText, InteractiveObject, TextSelection types
+- Maintained Flash Selection object behavior for text field selection management
