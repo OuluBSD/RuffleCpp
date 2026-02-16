@@ -16,6 +16,13 @@ Translate the Rust file `desktop/src/tracy.rs` to C++ without checking anything 
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated RuffleTracyConfig class for Tracy profiler configuration
+- Implemented formatter() accessor for tracing formatter
+- Implemented stack_depth() static method returning 0 (no stack traces to reduce overhead)
+- Used forward declarations for tracing::Metadata and tracing_subscriber types
+- Added proper namespace structure under ruffle::desktop::tracy

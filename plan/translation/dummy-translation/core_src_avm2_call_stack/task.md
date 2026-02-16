@@ -16,6 +16,17 @@ Translate the Rust file `core/src/avm2/call_stack.rs` to C++ without checking an
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated CallStack template class for AVM2 call stack tracking
+- Implemented push() to add methods to the call stack
+- Implemented pop() to remove the most recent method
+- Implemented display() for formatting stack traces with special handling for script initializers
+- Implemented is_empty() utility method
+- Added to_string() helper function for stream output
+- Used std::vector for stack storage
+- Template pattern for GC types
+- Added proper forward declarations for WString and Method
