@@ -16,6 +16,6 @@ Translate the Rust file `core/src/avm2/object/file_reference_object.rs` to C++ w
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
