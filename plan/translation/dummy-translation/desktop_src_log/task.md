@@ -15,7 +15,14 @@ Translate the Rust file `desktop/src/log.rs` to C++ without checking anything in
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated FilenamePattern enum with SingleFile and WithTimestamp variants
+- Implemented from_str() parsing function returning std::optional
+- Added create_path() helper function for generating log file paths
+- Added as_str() helper function for converting pattern to string
+- Used std::filesystem::path for path handling
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved

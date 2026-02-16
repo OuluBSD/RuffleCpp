@@ -15,7 +15,15 @@ Translate the Rust file `desktop/src/dbus.rs` to C++ without checking anything i
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated FreedesktopSettings class for freedesktop.org settings access
+- Translated ColorScheme enum with NoPreference, Light, and Dark variants
+- Translated GameModeGuard RAII guard for GameMode session management
+- Translated GameModeSession class with shared ownership pattern
+- Used std::optional for Result type representation
+- Added Linux-specific #ifdef guard
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
