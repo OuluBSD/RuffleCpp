@@ -16,6 +16,12 @@ Translate the Rust file `render/src/blend.rs` to C++ without checking anything i
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated ExtendedBlendMode enum with all 16 blend mode variants
+- Implemented extended_blend_mode_from_str() returning std::optional<ExtendedBlendMode>
+- Implemented extended_blend_mode_to_str() returning const char*
+- ExtendedBlendMode extends swf::BlendMode with additional Shader variant
