@@ -15,7 +15,15 @@ Translate the Rust file `core/src/avm2/globals/flash/text/style_sheet.rs` to C++
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated inner_parse_css for parsing CSS strings into style objects
+- Translated inner_parse_color for parsing hex color values
+- Translated inner_parse_font_family for processing font lists
+- Implemented clear_internal for clearing all styles
+- Implemented set_style_internal for setting/removing styles by selector
+- Used std::vector for argument lists
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
