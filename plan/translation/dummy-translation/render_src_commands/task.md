@@ -16,6 +16,17 @@ Translate the Rust file `render/src/commands.rs` to C++ without checking anythin
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated CommandHandler abstract interface class
+- Implemented RenderBlendMode class with Builtin and Shader variants
+- Translated Command enum with 12 command variants
+- Implemented CommandList class with maskers_in_progress tracking
+- CommandList implements CommandHandler interface for command recording
+- Added execute() method for running commands on a handler
+- Implemented mask handling (push_mask, activate_mask, deactivate_mask, pop_mask)
+- Added drawing_mask() helper method
+- Used std::optional for command data storage

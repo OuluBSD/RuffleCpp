@@ -16,6 +16,14 @@ Translate the Rust file `swf/src/avm1/opcode.rs` to C++ without checking anythin
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated OpCode enum with all 73 AVM1 opcodes
+- Used uint8_t enum class for type safety
+- Implemented from_u8() function using switch statement for opcode lookup
+- Implemented format() function for string representation of opcodes
+- Maintained original opcode hex values
+- Added op_code_utils namespace for utility functions
