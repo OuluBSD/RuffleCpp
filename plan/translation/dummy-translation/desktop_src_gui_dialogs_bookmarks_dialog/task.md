@@ -16,6 +16,16 @@ Translate the Rust file `desktop/src/gui/dialogs/bookmarks_dialog.rs` to C++ wit
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated BookmarkAddDialog class for adding new bookmarks
+- Translated SelectedBookmark struct for holding selected bookmark data during editing
+- Translated BookmarksDialog class for managing bookmarks list
+- Implemented show_bookmark_table() private method for displaying bookmark table
+- Implemented show_bookmark_panel() private method for editing selected bookmark
+- Uses egui and egui_extras for GUI rendering with localization support
+- Added proper forward declarations for egui, unic_langid, and ruffle types
+- Maintains integration with GlobalPreferences for bookmark persistence

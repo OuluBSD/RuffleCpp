@@ -16,6 +16,14 @@ Translate the Rust file `desktop/src/gui/dialogs/open_url_dialog.rs` to C++ with
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated OpenUrlDialog class for confirming URL opening
+- Implemented constructor taking url::Url parameter
+- Implemented show() method for displaying the dialog with egui
+- Implemented render_window_contents() for rendering dialog UI
+- Uses egui for GUI rendering with localization support
+- Added proper forward declarations for egui, unic_langid, and url types
