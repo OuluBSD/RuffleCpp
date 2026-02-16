@@ -15,7 +15,15 @@ Translate the Rust file `desktop/src/main.rs` to C++ without checking anything i
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated main entry point declarations
+- Added panic_hook handler for crash reporting
+- Added thread-local storage classes for callstack, render info, and SWF info
+- Added migrate_logs function for log migration
+- Included Windows-specific Console class
+- Added Tracy profiler support declarations
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved

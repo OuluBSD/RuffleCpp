@@ -15,7 +15,15 @@ Translate the Rust file `video/external/src/decoder/webcodecs.rs` to C++ without
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated H264Decoder class using WebCodecs API
+- Added VideoDecoder interface base class
+- Added NaluIterator for NAL unit parsing
+- Included NALU type constants (NALU_TYPE_IDR)
+- Added pixel format and encoded video chunk type enums
+- Translated configure_decoder, preload_frame, and decode_frame methods
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved

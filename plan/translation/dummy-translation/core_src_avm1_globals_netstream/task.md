@@ -15,7 +15,12 @@ Translate the Rust file `core/src/avm1/globals/netstream.rs` to C++ without chec
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated NetStream class with constructor
+- Added all NetStream methods (play, pause, seek, setBufferTime, publish, play2, receiveAudio, receiveVideo, onPeerConnect, close, attachAudio, attachVideo, send, getInfo, checkPolicyFile, maxPauseBufferTime, backBufferTime)
+- Added property getters (bufferLength, bufferTime, bytesLoaded, bytesTotal, time)
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved

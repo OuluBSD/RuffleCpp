@@ -15,7 +15,13 @@ Translate the Rust file `core/src/html/line_wrapping.rs` to C++ without checking
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated wrap_line function for HTML text line wrapping
+- Added find_allowed_breaks helper function
+- Included SWF version-specific behavior (SWF >= 8 vs SWF <= 7)
+- Added CJK character handling helpers (is_cjk_like, is_opening, is_closing)
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
