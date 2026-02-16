@@ -16,6 +16,6 @@ Translate the Rust file `desktop/src/gui/widgets/mod.rs` to C++ without checking
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
