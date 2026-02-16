@@ -16,6 +16,6 @@ Translate the Rust file `swf/src/types/gradient_filter.rs` to C++ without checki
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
