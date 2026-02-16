@@ -16,6 +16,17 @@ Translate the Rust file `desktop/src/gui/movie.rs` to C++ without checking anyth
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated MovieViewRenderer class for wgpu-based movie rendering
+- Implemented get_vertices() helper function for generating quad vertices
+- MovieViewRenderer manages bind_group_layout, pipeline, sampler, and vertex buffer
+- Translated MovieView class implementing RenderTarget interface
+- Implemented MovieViewFrame wrapper for TextureView
+- Added render() method for drawing movie content
+- Implemented all RenderTarget methods: resize, format, width, height, get_next_texture, submit
+- Used std::shared_ptr for renderer sharing
+- Maintained MENU_HEIGHT constant (24 pixels)

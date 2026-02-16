@@ -16,6 +16,15 @@ Translate the Rust file `core/src/avm2/object/vertex_buffer_3d_object.rs` to C++
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated VertexBuffer3DObject template class for AVM2
+- Implemented VertexBuffer3DObjectData struct with base, context3d, handle, and data32_per_vertex fields
+- Added VertexBuffer3DObjectWeak for weak references
+- Implemented from_handle() static factory method
+- Added accessor methods: handle(), context3d(), data32_per_vertex()
+- Used std::shared_ptr for VertexBuffer handle
+- Added DebugFormatter specialization
