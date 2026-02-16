@@ -16,6 +16,14 @@ Translate the Rust file `desktop/src/custom_event.rs` to C++ without checking an
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated RuffleEvent enum class with variants using std::variant
+- Implemented OpenType enum class with File and Directory variants
+- Added event data structs for each variant (TaskPoll, OnMetadata, BrowseAndOpen, Open, etc.)
+- Used std::unique_ptr for LaunchOptions to match Rust Box semantics
+- Added constructors for each event variant
+- Implemented data() accessor methods for variant access
