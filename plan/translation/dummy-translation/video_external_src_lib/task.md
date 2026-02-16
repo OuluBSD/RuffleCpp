@@ -16,6 +16,6 @@ Translate the Rust file `video/external/src/lib.rs` to C++ without checking anyt
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
