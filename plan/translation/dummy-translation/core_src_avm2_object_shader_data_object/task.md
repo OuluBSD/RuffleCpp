@@ -16,6 +16,16 @@ Translate the Rust file `core/src/avm2/object/shader_data_object.rs` to C++ with
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated ShaderDataObject class with allocator function
+- Added ShaderDataObjectData with shader field (optional PixelBenderShaderHandle)
+- Implemented pixel_bender_shader() getter with cell-like semantics (takes ownership)
+- Implemented set_pixel_bender_shader() setter
+- Implemented gc_base() for TObject trait using HasPrefixField pattern
+- Used HasPrefixField pattern for base class
+- Template pattern for GC types
+- Added proper forward declarations for AVM2 types
