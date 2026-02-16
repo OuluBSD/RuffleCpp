@@ -16,6 +16,13 @@ Translate the Rust file `core/src/avm2/object/net_connection_object.rs` to C++ w
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated NetConnectionObject class with allocator function
+- Added NetConnectionObjectData with handle field (std::optional)
+- Implemented handle getter/setter methods
+- Used HasPrefixField pattern for base class
+- Template pattern for GC types

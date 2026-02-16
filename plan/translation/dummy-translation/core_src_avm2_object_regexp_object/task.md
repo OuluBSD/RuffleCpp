@@ -16,6 +16,13 @@ Translate the Rust file `core/src/avm2/object/regexp_object.rs` to C++ without c
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated RegExpObject class with allocator function
+- Added RegExpObjectData with regexp field
+- Implemented regexp getter/mutator methods
+- Used HasPrefixField pattern for base class
+- Template pattern for GC types

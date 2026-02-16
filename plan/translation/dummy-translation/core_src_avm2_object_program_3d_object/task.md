@@ -16,6 +16,13 @@ Translate the Rust file `core/src/avm2/object/program_3d_object.rs` to C++ witho
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Program3DObject class with from_context factory method
+- Added Program3DObjectData with context3d and shader_module_handle fields
+- Implemented shader_module_handle getter/mutator methods
+- Used HasPrefixField pattern for base class
+- Template pattern for GC types
