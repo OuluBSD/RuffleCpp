@@ -16,6 +16,16 @@ Translate the Rust file `core/src/avm2/globals/error.rs` to C++ without checking
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Error class functions: get_error_message and get_stack_trace
+- Implemented get_error_message() returning formatted "Error #<id>" string
+- Implemented get_stack_trace() with version-dependent behavior:
+  - Flash Player 11.5+ (player_version >= 18) and SWF >= 18: stack traces always enabled
+  - Flash Player 11.4 and earlier, or SWF < 18: enabled only in Debug mode
+- Returns null when stack traces are disabled or not available
+- Used template pattern for GC types
+- Added proper forward declarations for AVM2 types

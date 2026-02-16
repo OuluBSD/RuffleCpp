@@ -16,6 +16,21 @@ Translate the Rust file `core/src/avm2/globals/function.rs` to C++ without check
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Function builtin and prototype implementation
+- Implemented create_dummy_function() helper using Function.createDummyFunction
+- Implemented function_constructor() that creates dummy function (errors if args provided)
+- Implemented _init_function_class() to register Function in SystemClasses
+- Implemented call() for Function.prototype.call - calls function with this and args
+- Implemented apply() for Function.prototype.apply - calls function with this and arg array
+  - Handles null/undefined as no arguments
+  - Validates array argument and resolves array holes
+  - Throws error 1116 for invalid array argument
+- Implemented get_length() getter for function parameter count
+- Implemented get_prototype() and set_prototype() for function prototype access
+- Used template pattern for GC types
+- Added proper forward declarations for AVM2 types
