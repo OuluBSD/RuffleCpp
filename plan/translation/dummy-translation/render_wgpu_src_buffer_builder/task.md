@@ -15,7 +15,13 @@ Translate the Rust file `render/wgpu/src/buffer_builder.rs` to C++ without check
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
-## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+## Translation Details
+- Translated BufferBuilder class for WebGPU buffer construction
+- Implemented BufferFull error struct for limit exceeded errors
+- Added new_for_vertices() and new_for_uniform() static factory methods
+- Implemented set_buffer_limit() for configuring maximum buffer size
+- Implemented add<T>() template method for adding aligned data to buffer
+- Implemented finish() method for creating final wgpu::Buffer
+- Implemented copy_to() method for copying data via staging belt
+- Used std::vector<uint8_t> for internal buffer storage
+- Used std::optional for result type (matching Rust Result)
