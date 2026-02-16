@@ -16,6 +16,6 @@ Translate the Rust file `core/src/avm2/globals/flash/system.rs` to C++ without c
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
