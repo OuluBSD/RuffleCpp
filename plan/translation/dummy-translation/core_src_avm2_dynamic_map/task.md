@@ -16,6 +16,14 @@ Translate the Rust file `core/src/avm2/dynamic_map.rs` to C++ without checking a
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated DynamicMap for AVM2 object dynamic properties
+- Implemented DynamicKey template class (String, Uint, Object variants)
+- Added DynamicProperty struct with value and enumerable flag
+- Implemented DynamicMap template class with hash table storage
+- Added iteration support with next(), pair_at(), key_at(), value_at() methods
+- Used std::unordered_map with FNV hasher (similar to Rust FnvBuildHasher)
