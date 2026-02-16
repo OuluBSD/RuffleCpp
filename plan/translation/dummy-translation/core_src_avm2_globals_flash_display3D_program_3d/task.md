@@ -16,6 +16,13 @@ Translate the Rust file `core/src/avm2/globals/flash/display3D/program_3d.rs` to
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated upload function for flash.display3D.Program3D
+- Uploads vertex and fragment AGAL shaders from ByteArray
+- Calls context3d().upload_shaders() with extracted shader bytes
+- Returns Value::Undefined
+- Uses std::vector for args parameter

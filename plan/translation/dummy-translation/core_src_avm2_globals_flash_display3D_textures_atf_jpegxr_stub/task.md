@@ -16,6 +16,12 @@ Translate the Rust file `core/src/avm2/globals/flash/display3D/textures/atf_jpeg
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated do_compressed_upload function stub
+- Returns error indicating compressed textures not supported
+- Uses template pattern for GC types
+- Includes TextureObject and Object type parameters

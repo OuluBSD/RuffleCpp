@@ -16,6 +16,13 @@ Translate the Rust file `core/src/avm2/globals/flash/text/engine/text_line.rs` t
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated get_text_width and get_text_height functions
+- Measures text dimensions via edit_text.measure_text()
+- Returns pixel values converted from Twips
+- Uses std::vector for args parameter
+- Template pattern for GC types
