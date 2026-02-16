@@ -16,6 +16,6 @@ Translate the Rust file `core/src/avm2/globals/flash/events/event_dispatcher.rs`
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
