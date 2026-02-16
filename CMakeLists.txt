@@ -32,11 +32,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Generic" AND ${CMAKE_SYSTEM_PROCESSOR} MATCHES
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-z,stack-size=2000000")
 endif()
 
-# Find required packages
-find_package(wxWidgets REQUIRED COMPONENTS core base)
-
-# Include wxWidgets settings
-include(${wxWidgets_USE_FILE})
+# Find required packages - wxWidgets is optional for now
+find_package(wxWidgets COMPONENTS core base)
 
 # Add subdirectories for different components
 add_subdirectory(core)
@@ -55,4 +52,12 @@ if(DEFINED ENV{CFG_RELEASE_CHANNEL})
     add_compile_definitions(CFG_RELEASE_CHANNEL="$ENV{CFG_RELEASE_CHANNEL}")
 else()
     add_compile_definitions(CFG_RELEASE_CHANNEL="local")
+endif()
+
+# Print configuration summary
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "wxWidgets found: ${wxWidgets_FOUND}")
+if(wxWidgets_FOUND)
+    include(${wxWidgets_USE_FILE})
+    message(STATUS "wxWidgets libraries: ${wxWidgets_LIBRARIES}")
 endif()

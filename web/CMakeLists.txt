@@ -2,9 +2,18 @@
 
 # Check if we're building for WASM
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Generic" AND ${CMAKE_SYSTEM_PROCESSOR} MATCHES "wasm")
+    # Create placeholder source files if no actual sources exist
+    set(WEB_SOURCES "")
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/lib.cpp")
+        list(APPEND WEB_SOURCES src/lib.cpp)
+    else()
+        # Create a minimal placeholder
+        set(WEB_SOURCES src/lib_placeholder.cpp)
+    endif()
+
     # Add the web/WASM library
     add_library(ruffle_web
-        src/lib.rs.cpp  # This would be the translated lib.rs from web/
+        ${WEB_SOURCES}
         # Add other web source files as they are translated from Rust
     )
 
@@ -37,8 +46,15 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Generic" AND ${CMAKE_SYSTEM_PROCESSOR} MATCHES
     )
 else()
     # For non-WASM builds, we might still have web-related utilities
+    set(WEB_UTIL_SOURCES "")
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/util.cpp")
+        list(APPEND WEB_UTIL_SOURCES src/util.cpp)
+    else()
+        set(WEB_UTIL_SOURCES src/util_placeholder.cpp)
+    endif()
+
     add_library(ruffle_web_util
-        src/util.cpp
+        ${WEB_UTIL_SOURCES}
         # Add other web utility source files
     )
 
