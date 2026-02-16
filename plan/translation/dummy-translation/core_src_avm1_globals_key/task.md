@@ -15,7 +15,14 @@ Translate the Rust file `core/src/avm1/globals/key.rs` to C++ without checking a
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Translated Key object with all key code constants (CAPSLOCK, BACKSPACE, DELETEKEY, etc.)
+- Implemented OBJECT_DECLS with all static properties
+- Added create function for Key object with broadcaster support
+- Translated is_down, is_toggled, get_ascii, get_code methods
+- Used template pattern for GC types
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
