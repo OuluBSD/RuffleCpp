@@ -16,6 +16,12 @@ Translate the Rust file `core/src/avm2/globals/global_scope.rs` to C++ without c
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated create_global_scope function for global scope object creation
+- Global scope is the object that serves as the global scope for ActionScript code
+- Uses template pattern for GC types
+- Added proper forward declarations for AVM2 types
