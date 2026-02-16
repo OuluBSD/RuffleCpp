@@ -16,6 +16,14 @@ Translate the Rust file `desktop/src/preferences/storage.rs` to C++ without chec
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated StorageBackend enum with Disk and Memory variants
+- Implemented default_storage_backend() returning Disk as default
+- Added from_str() parsing function returning std::optional
+- Added as_str() helper function for converting enum to string
+- Implemented create_backend() factory function returning unique_ptr<StorageBackend>
+- Used forward declarations for storage backend types

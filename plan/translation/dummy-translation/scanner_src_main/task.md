@@ -16,6 +16,13 @@ Translate the Rust file `scanner/src/main.rs` to C++ without checking anything i
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated main entry point for scanner
+- Implemented main_func with mode-based dispatch (Scan, Analyze, ExecuteReport)
+- Used switch statement for mode handling
+- ExecuteReport mode silently ignores errors to avoid polluting CSV output
+- Included dependencies on cli_options, analyze, execute, and scan modules

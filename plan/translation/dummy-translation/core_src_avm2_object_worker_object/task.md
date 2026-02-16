@@ -16,6 +16,15 @@ Translate the Rust file `core/src/avm2/object/worker_object.rs` to C++ without c
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated WorkerObjectData template class with base ScriptObjectData field
+- Translated WorkerObjectWeak template class for weak references using GcWeak
+- Translated WorkerObject template class inheriting from TObject
+- Implemented gc_base() override returning base script object
+- Implemented new_object() static factory method
+- Used template pattern for GC types
+- Added proper forward declarations for AVM2 types

@@ -16,6 +16,15 @@ Translate the Rust file `tests/framework/src/options/image_comparison.rs` to C++
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated ImageComparisonCheck struct with tolerance, max_outliers, and filter fields
+- Translated ImageComparison class with optional simple checks and advanced checks vector
+- Implemented checks() method returning std::expected with validation logic
+- Added validation to prevent mixing simple and advanced checks
+- Included ImageTrigger and known_failure fields
+- Used std::optional for optional fields
+- Added getter and setter methods for all fields
