@@ -16,6 +16,14 @@ Translate the Rust file `swf/src/types/blur_filter.rs` to C++ without checking a
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated BlurFilter struct with blur_x, blur_y, and flags fields
+- Implemented BlurFilterFlags enum with PASSES flag
+- Added PASS_SCALES constant array for accumulative blur calculations
+- Implemented num_passes(), scale(), impotent(), and calculate_dest_rect() methods
+- Added scale_blur() static helper method
+- Used forward declarations for Fixed16, Rectangle, and Twips types

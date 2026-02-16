@@ -16,6 +16,12 @@ Translate the Rust file `core/src/avm2/globals/class.rs` to C++ without checking
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Class class allocator function (returns error 1115)
+- Implemented get_prototype function to retrieve class prototype
+- Used template pattern for GC types
+- Added proper forward declarations for AVM2 types

@@ -16,6 +16,15 @@ Translate the Rust file `core/src/avm2/property.rs` to C++ without checking anyt
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Property enum class with Virtual, Method, Slot, and ConstSlot variants
+- Implemented PropertyClass template class for lazy class resolution
+- Added Any, Class, and Name type variants for PropertyClass
+- Implemented coerce() method for property type coercion
+- Added get_class() and get_name() methods for PropertyClass
+- Used std::variant for enum-like behavior in C++
+- Added convenience constructors for Property types

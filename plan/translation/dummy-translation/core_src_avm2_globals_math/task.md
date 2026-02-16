@@ -16,6 +16,15 @@ Translate the Rust file `core/src/avm2/globals/math.rs` to C++ without checking 
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Math class functions: abs, acos, asin, atan, ceil, cos, exp, floor, log, sin, sqrt, tan
+- Implemented special Math functions: round, atan2, max, min, pow, random
+- Added call_handler and math_allocator (both throw errors - Math cannot be instantiated)
+- Used wrap_std macro pattern translated to template functions
+- Implemented Flash-specific Math.round behavior (rounds toward infinity)
+- Added special case handling for pow() with infinite/NaN values
+- Implemented random() with restricted f64 value set for SWF compatibility

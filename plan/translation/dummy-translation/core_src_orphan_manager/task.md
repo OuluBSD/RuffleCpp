@@ -16,6 +16,15 @@ Translate the Rust file `core/src/orphan_manager.rs` to C++ without checking any
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated OrphanManager template class for AVM2 orphan object management
+- Implemented add_orphan_obj() to add display objects to orphan list
+- Added each_orphan_obj() static method for iterating over orphans
+- Implemented cleanup_dead_orphans() to remove garbage-collected orphans
+- Added valid_orphan() helper function
+- Used std::shared_ptr to simulate Rust Rc behavior
+- Maintained Flash behavior for orphan movie clips
