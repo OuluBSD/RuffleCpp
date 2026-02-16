@@ -16,6 +16,12 @@ Translate the Rust file `core/src/avm2/globals/flash/ui/mouse.rs` to C++ without
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated hide() and show() functions for flash.ui.Mouse
+- Functions call activation.context.ui.set_mouse_visible()
+- Returns Value::Undefined
+- Uses std::vector for args parameter

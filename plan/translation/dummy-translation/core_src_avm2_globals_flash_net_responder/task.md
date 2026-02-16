@@ -16,6 +16,12 @@ Translate the Rust file `core/src/avm2/globals/flash/net/responder.rs` to C++ wi
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated init function for flash.net.Responder
+- Re-exported responder_allocator from object module
+- Sets up result and status callbacks on Responder object
+- Uses std::vector for args parameter

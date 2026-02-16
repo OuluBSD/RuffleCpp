@@ -16,6 +16,12 @@ Translate the Rust file `core/src/avm2/globals/flash/net/object_encoding.rs` to 
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated get_dynamic_property_writer and set_dynamic_property_writer
+- Stub functions that call avm2_stub_getter/setter macros
+- Returns Value::Undefined
+- Uses std::vector for args parameter

@@ -16,6 +16,12 @@ Translate the Rust file `core/src/avm2/globals/boolean.rs` to C++ without checki
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated boolean_constructor and call_handler functions
+- Converts first argument to boolean, defaults to false
+- Uses std::vector for args parameter
+- Template pattern for GC types
