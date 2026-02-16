@@ -16,6 +16,18 @@ Translate the Rust file `frontend-utils/src/recents/write.rs` to C++ without che
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated RecentsWriter class for managing recent files list persistence
+- Implemented clear() method to remove all entries
+- Implemented push() method with duplicate detection and limit enforcement
+- Added with_underlying_table() helper for TOML document editing
+- Implemented create_recent_table() for TOML table creation
+- Translated Recent struct with content_descriptor and name fields
+- Added Recents type alias as std::vector<Recent>
+- Used std::optional for index tracking
+- Maintained move-to-top behavior for existing entries
+- Preserved limit-based eviction of old entries
