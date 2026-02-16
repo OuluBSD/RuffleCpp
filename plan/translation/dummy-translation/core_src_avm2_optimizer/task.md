@@ -16,6 +16,13 @@ Translate the Rust file `core/src/avm2/optimizer.rs` to C++ without checking any
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated optimizer module with submodule declarations (blocks, dce, nop_remover, peephole, type_aware)
+- Implemented optimize() template function that runs all optimizer passes
+- Added forward declarations for Activation, Method, Op, Error, Exception, and ResolvedParamConfig
+- Used std::vector for code operations and std::unordered_set for jump targets
+- Maintained original function signature with GC template parameter
