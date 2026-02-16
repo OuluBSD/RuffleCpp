@@ -16,6 +16,18 @@ Translate the Rust file `tests/input-format/src/format.rs` to C++ without checki
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated MousePosition struct with x, y double coordinates
+- Implemented MouseButton enum class (Left, Middle, Right)
+- Translated TextControlCode enum with all text field control codes
+- Implemented AutomatedKey struct with Type enum and char_value field
+- Added static factory methods: char_key(), numpad_key(), special_key()
+- Translated EventHandledAssertion struct with value and message fields
+- Implemented AutomatedEvent struct with Type enum and all event data fields
+- Added static factory methods for all event types (wait, mouse_move, mouse_down, etc.)
+- Used std::optional for optional fields (index, assert_handled, lines, pixels, cursor)
+- Maintained FlashTAS input format compatibility
