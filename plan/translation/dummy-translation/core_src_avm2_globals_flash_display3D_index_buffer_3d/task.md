@@ -16,6 +16,14 @@ Translate the Rust file `core/src/avm2/globals/flash/display3D/index_buffer_3d.r
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated flash.display3D.IndexBuffer3D native methods: uploadFromByteArray(), uploadFromVector()
+- uploadFromByteArray() reads index data from ByteArray and uploads to GPU
+- uploadFromVector() reads index data from Vector.<uint> and uploads to GPU
+- Uses context3d().upload_index_buffer_data() for actual upload
+- Uses std::vector for args parameter
+- Template pattern for GC types

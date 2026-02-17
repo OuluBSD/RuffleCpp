@@ -16,6 +16,14 @@ Translate the Rust file `core/src/avm2/globals/flash/ui/context_menu.rs` to C++ 
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated make_context_menu_state() helper function
+- Processes built-in items flags (zoom, quality, play, loop, rewind, forward_and_back, print)
+- Processes custom ContextMenuItem objects from array
+- Builds ContextMenuState with ContextMenuItem and ContextMenuCallback entries
+- Uses slot constants from flash_ui_context_menu, flash_ui_context_menu_built_in_items, flash_ui_context_menu_item, flash_display_native_menu_item namespaces
+- Template pattern for GC types

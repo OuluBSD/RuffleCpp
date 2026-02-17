@@ -16,6 +16,15 @@ Translate the Rust file `core/src/avm2/globals/flash/external/external_interface
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated flash.external.ExternalInterface native methods: call(), available getter, addCallback(), objectID getter
+- call() invokes ExternalInterface::call_method() with converted arguments
+- addCallback() registers AVM2 callbacks for JavaScript to call
+- get_object_id() returns SWF's DOM object ID or null
+- check_available() helper throws error 2067 if ExternalInterface unavailable
+- Uses std::vector for args parameter
+- Template pattern for GC types
