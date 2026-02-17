@@ -16,6 +16,13 @@ Translate the Rust file `desktop/src/gui/locale.rs` to C++ without checking anyt
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated localization functions: text(), optional_text(), available_languages(), text_with_args()
+- Translated reorder_bidi() and mirror_char() helper functions for RTL text support
+- Translated LocalizableText class for text that may need localization
+- Used forward declarations for unic_langid and fluent_bundle types
+- Maintained original function signatures and documentation

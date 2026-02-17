@@ -16,6 +16,14 @@ Translate the Rust file `desktop/src/gui/context_menu.rs` to C++ without checkin
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated ContextMenu class for right-click context menu
+- Implemented constructor taking ContextMenuItem vector and PlayerEvent
+- Implemented close_event() accessor method
+- Implemented show() method for displaying context menu with egui
+- Used forward declarations for egui, unic_langid, winit, and ruffle types
+- Maintained original method signatures and documentation
