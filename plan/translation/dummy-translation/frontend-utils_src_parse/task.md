@@ -16,6 +16,17 @@ Translate the Rust file `frontend-utils/src/parse.rs` to C++ without checking an
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated DocumentHolder template class for TOML document management
+- Implemented ParseWarning struct with InvalidToml, UnexpectedType, UnsupportedValue variants
+- Implemented ParseContext class for tracking parsing path
+- Implemented ReadExt abstract class for TOML reading operations
+- Added factory methods for ParseWarning: invalid_toml(), unexpected_type(), unsupported_value()
+- Implemented ParseDetails template struct for parse results with warnings
+- Used std::optional for optional return types
+- Used std::function for edit callbacks
+- Maintains original TOML document alongside parsed values for safe upgrades
