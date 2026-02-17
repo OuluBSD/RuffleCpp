@@ -16,6 +16,6 @@ Translate the Rust file `core/build_playerglobal/src/cli.rs` to C++ without chec
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
