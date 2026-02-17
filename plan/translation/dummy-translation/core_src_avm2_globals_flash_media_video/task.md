@@ -16,6 +16,15 @@ Translate the Rust file `core/src/avm2/globals/flash/media/video.rs` to C++ with
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated flash.media.Video native methods
+- Implemented video_allocator() for creating Video display objects
+- Implemented init() method called from constructor to set dimensions
+- Implemented attach_net_stream() for attaching NetStream to video
+- Uses initialize_for_allocator() helper for object initialization
+- Template pattern for GC types
+- Added proper forward declarations for AVM2 types
