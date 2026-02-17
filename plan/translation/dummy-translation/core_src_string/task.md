@@ -16,6 +16,12 @@ Translate the Rust file `core/src/string.rs` to C++ without checking anything in
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated SwfStrExt trait as a class with static methods
+- Implemented decode() and decode_owned() methods for SWF string conversion
+- Added forward declarations for WStr, WString, and swf::Encoding types
+- Re-exported wstr types for convenience

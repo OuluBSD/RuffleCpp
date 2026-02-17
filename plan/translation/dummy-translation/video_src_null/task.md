@@ -16,6 +16,15 @@ Translate the Rust file `video/src/null.rs` to C++ without checking anything ini
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated NullVideoBackend class implementing VideoBackend interface
+- Implemented register_video_stream() that succeeds but does nothing
+- Implemented configure_video_stream_decoder() that always succeeds
+- Implemented preload_video_stream_frame() that returns FrameDependency::None
+- Implemented decode_video_stream_frame() that returns Error::DecodingNotSupported
+- Used SlotMap for stream storage (forward declared)
+- Added proper forward declarations for video and render types
