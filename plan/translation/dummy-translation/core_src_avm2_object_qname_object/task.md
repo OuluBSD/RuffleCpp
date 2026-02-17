@@ -16,6 +16,20 @@ Translate the Rust file `core/src/avm2/object/qname_object.rs` to C++ without ch
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated QNameObject struct representing a boxed QName
+- Translated QNameObjectWeak weak reference type
+- Translated QNameObjectData internal struct with base and name fields
+- Implemented new_empty() constructor for empty QName
+- Implemented from_name() for boxing Multiname into QNameObject
+- Implemented name(), set_namespace(), set_local_name() accessors
+- Implemented local_name(), uri(), is_any_namespace() query methods
+- Implemented set_is_qname() and init_name() mutators
+- Implemented TObject trait methods: gc_base(), get_next_enumerant(), get_enumerant_value(), get_enumerant_name()
+- Used RefLock for interior mutability of Multiname field
+- Template pattern for GC types
+- Added proper forward declarations for all dependencies
