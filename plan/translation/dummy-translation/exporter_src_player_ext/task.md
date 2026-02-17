@@ -16,6 +16,17 @@ Translate the Rust file `exporter/src/player_ext.rs` to C++ without checking any
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Created `exporter/src/player_ext.h` (50 lines Rust -> ~110 lines C++)
+- Translated PlayerExporterExt trait as abstract base class
+- Implemented capture_frame() for capturing frames as RGBA images
+- Implemented header_frames() for getting SWF header frame count
+- Implemented force_root_clip_play() for resuming playback
+- Translated PlayerExporterImpl for Arc<Mutex<Player>> pattern
+- Used std::shared_ptr and std::mutex for thread-safe player access
+- Used std::unique_lock for RAII-based mutex locking
+- Added forward declarations for WgpuRenderBackend and TextureTarget
