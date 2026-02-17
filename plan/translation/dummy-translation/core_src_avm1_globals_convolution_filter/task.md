@@ -16,6 +16,6 @@ Translate the Rust file `core/src/avm1/globals/convolution_filter.rs` to C++ wit
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
