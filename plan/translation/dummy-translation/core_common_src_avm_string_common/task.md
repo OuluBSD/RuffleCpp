@@ -16,6 +16,14 @@ Translate the Rust file `core/common/src/avm_string/common.rs` to C++ without ch
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated CommonStrings class template for common string interning
+- Defined all common string fields (ascii_chars array and 200+ string constants)
+- Maintained alphabetical ordering of string constants
+- Template-based design for GC compatibility
+- Used std::array for ASCII character storage
+- Added create static method template for initialization

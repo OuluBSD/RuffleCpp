@@ -16,6 +16,15 @@ Translate the Rust file `core/common/src/avm_string/avm_string.rs` to C++ withou
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated AvmString class template for AVM string representation
+- Implemented factory methods: new_ascii_static, new_utf8, new_utf8_bytes, new
+- Added substring and concat static methods
+- Implemented is_dependent, as_wstr, as_interned accessors
+- Added ptr_eq for pointer comparison
+- Template-based design for GC compatibility
+- Used std::shared_ptr for garbage collected representation
