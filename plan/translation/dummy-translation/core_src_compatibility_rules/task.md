@@ -16,6 +16,18 @@ Translate the Rust file `core/src/compatibility_rules.rs` to C++ without checkin
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated UrlRewriteStage enum for rewrite timing
+- Translated UrlRewriteRule struct for URL rewriting rules
+- Translated UrlBlockRule struct for URL blocking rules
+- Translated RuleSet struct for grouping rules
+- Translated CompatibilityRules class for managing rule sets
+- Implemented empty() and builtin_rules() constructors
+- Implemented block_or_rewrite_swf_url() for URL processing
+- Implemented domain_matches() helper function for domain pattern matching
+- Added built-in rules for kongregate, fpdownload, and mochiads
+- Template pattern for GC types

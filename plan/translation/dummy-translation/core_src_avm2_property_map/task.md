@@ -16,6 +16,15 @@ Translate the Rust file `core/src/avm2/property_map.rs` to C++ without checking 
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated PropertyMap struct for named properties on objects
+- Implemented get(), get_mut(), contains_key() methods for QName lookup
+- Implemented get_for_multiname() and get_with_ns_for_multiname() for Multiname lookup
+- Implemented iter() for iterating over all properties
+- Implemented insert(), insert_with_namespace(), remove() methods
+- Template pattern for GC types
+- Added proper forward declarations for all dependencies
