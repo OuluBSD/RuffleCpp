@@ -16,6 +16,6 @@ Translate the Rust file `render/wgpu/src/filters/displacement_map.rs` to C++ wit
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
