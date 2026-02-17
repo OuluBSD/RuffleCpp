@@ -16,6 +16,17 @@ Translate the Rust file `tests/framework/src/options/player.rs` to C++ without c
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated PlayerOptions class for test framework player configuration
+- Implemented setter methods for all configuration options
+- Added setup() method for configuring PlayerBuilder
+- Added can_run() method for checking environment support
+- Added viewport_dimensions() method for calculating output size
+- Added create_renderer() method for creating render backend
+- Used std::optional for optional configuration fields
+- Used std::chrono::milliseconds for duration type
+- Forward declared core and render types

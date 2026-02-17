@@ -15,6 +15,11 @@ Translate the Rust file `render/wgpu/src/buffer_builder.rs` to C++ without check
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Status
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
 ## Translation Details
 - Translated BufferBuilder class for WebGPU buffer construction
 - Implemented BufferFull error struct for limit exceeded errors
