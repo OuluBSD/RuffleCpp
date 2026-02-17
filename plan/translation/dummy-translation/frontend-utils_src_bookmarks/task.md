@@ -16,6 +16,14 @@ Translate the Rust file `frontend-utils/src/bookmarks.rs` to C++ without checkin
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Bookmark struct with content_descriptor and name fields
+- Implemented is_invalid() method to check if URL matches invalid URL constant
+- Created Bookmarks type alias as std::vector<Bookmark>
+- Forward declared read_bookmarks() function from read submodule
+- Forward declared BookmarksWriter class from write submodule
+- Added proper forward declarations for ContentDescriptor
