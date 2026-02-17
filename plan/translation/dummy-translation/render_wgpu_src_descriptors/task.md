@@ -16,6 +16,16 @@ Translate the Rust file `render/wgpu/src/descriptors.rs` to C++ without checking
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated Descriptors class for wgpu resource management
+- Implemented Quad struct for quad geometry (vertices, indices, transforms)
+- Added pipeline caching with PipelineKey hash map
+- Implemented copy_srgb_pipeline() for sRGB copy operations
+- Implemented copy_pipeline() for standard copy operations
+- Implemented pipelines() for render pipeline retrieval
+- Added proper mutex protection for thread-safe pipeline caches
+- Translated VERTEX_BUFFERS_DESCRIPTION_POS for vertex layouts
