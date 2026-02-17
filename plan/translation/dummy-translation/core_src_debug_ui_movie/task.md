@@ -16,6 +16,18 @@ Translate the Rust file `core/src/debug_ui/movie.rs` to C++ without checking any
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated MovieListWindow class for displaying list of known movies
+- Translated MovieWindow class for displaying movie details
+- Implemented show() methods for both windows with egui UI
+- Implemented show_information() panel with movie metadata display
+- Implemented show_characters() panel with character list and search
+- Translated movie_name() helper function for display names
+- Translated open_movie_button() and open_character_button() helper functions
+- Translated save_swf() function for saving SWF files
+- Used std::shared_ptr for SwfMovie references
+- Added proper forward declarations for all dependencies
