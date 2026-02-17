@@ -16,6 +16,14 @@ Translate the Rust file `tests/framework/src/image_trigger.rs` to C++ without ch
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated ImageTrigger class with Type enum (LastFrame, SpecificIteration, FsCommand)
+- Implemented constructors for each trigger type
+- Implemented type(), iteration(), is_specific_iteration(), is_last_frame(), is_fs_command() accessors
+- Implemented equality operators (==, !=)
+- Added parse_image_trigger() functions for string and integer parsing
+- Added proper error handling with std::invalid_argument and std::out_of_range exceptions

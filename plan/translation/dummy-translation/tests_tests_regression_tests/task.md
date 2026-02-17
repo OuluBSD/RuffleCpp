@@ -16,6 +16,18 @@ Translate the Rust file `tests/tests/regression_tests.rs` to C++ without checkin
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated TEST_TOML_NAME constant
+- Translated RuffleTestOpts struct with ignore_known_failures option
+- Implemented parse() method for command line argument parsing
+- Translated TestStatus enum (Continue, Sleep, Finished)
+- Translated TestRunner interface with tick() method
+- Implemented load_test_dir() for loading tests from directory
+- Translated Trial struct for test description
+- Implemented run_test() for executing test runner loop
+- Implemented regression_tests_main() entry point
+- Added environment variable handling for RUFFLE_TEST_OPTS
