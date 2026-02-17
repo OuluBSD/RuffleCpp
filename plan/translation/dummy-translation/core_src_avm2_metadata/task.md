@@ -16,6 +16,14 @@ Translate the Rust file `core/src/avm2/metadata.rs` to C++ without checking anyt
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated MetadataItem struct for key-value pairs in trait metadata
+- Translated Metadata class for AVM2 metadata representation
+- Implemented from_abc_index() for converting ABC metadata indexes to Metadata objects
+- Implemented as_json_object() for converting to avmplus:describeTypeJSON() format
+- Template pattern for GC types
+- Added proper forward declarations for all AVM2 types
