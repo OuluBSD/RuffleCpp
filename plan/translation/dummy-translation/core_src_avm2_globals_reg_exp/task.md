@@ -16,6 +16,13 @@ Translate the Rust file `core/src/avm2/globals/reg_exp.rs` to C++ without checki
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated RegExp builtin functions (init, call_handler)
+- Translated RegExp property getters (dotall, extended, global, ignoreCase, multiline, source, lastIndex)
+- Translated RegExp property setter (lastIndex)
+- Translated RegExp methods (exec, test)
+- Used template functions for GC types following existing patterns
