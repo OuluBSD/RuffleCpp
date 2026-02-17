@@ -16,6 +16,19 @@ Translate the Rust file `core/src/backend/audio/decoders/adpcm.rs` to C++ withou
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated ADPCM audio decoder
+- Implemented AdpcmDecoder class with Decoder trait
+- Implemented INDEX_TABLE and STEP_TABLE constants
+- Implemented SAMPLE_DELTA_CALCULATOR for 2-5 bit samples
+- Implemented Channel struct for per-channel state
+- Implemented next() for sample frame iteration
+- Implemented SeekableAdpcmDecoder for cursor-based readers
+- Implemented AdpcmSubstreamDecoder for sound stream blocks
+- Used std::optional for optional return values
+- Used std::array for stereo sample pairs
+- Added proper forward declarations for all dependencies
