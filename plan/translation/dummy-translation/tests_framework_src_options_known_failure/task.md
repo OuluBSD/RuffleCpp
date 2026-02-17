@@ -15,7 +15,12 @@ Translate the Rust file `tests/framework/src/options/known_failure.rs` to C++ wi
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Created `tests/framework/src/options/known_failure.h` (58 lines Rust -> ~100 lines C++)
+- Translated `KnownFailure` enum to variant-based class with None, TraceOutput, and Panic variants
+- Used std::variant for type-safe union representation
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved

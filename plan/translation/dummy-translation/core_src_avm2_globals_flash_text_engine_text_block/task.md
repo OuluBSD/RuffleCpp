@@ -15,7 +15,13 @@ Translate the Rust file `core/src/avm2/globals/flash/text/engine/text_block.rs` 
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Created `core/src/avm2/globals/flash/text/engine/text_block.h` (176 lines Rust -> ~95 lines C++)
+- Translated `create_text_line` function as template function
+- Translated `apply_format` helper function
+- Added slot index constants for TextBlock properties
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved

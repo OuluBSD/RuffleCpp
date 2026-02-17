@@ -15,7 +15,12 @@ Translate the Rust file `video/software/src/decoder.rs` to C++ without checking 
 - Handle memory management appropriately
 - Map Rust types to equivalent C++ types
 
+## Translation Details
+- Created `video/software/src/decoder.h` (46 lines Rust -> ~80 lines C++)
+- Translated `VideoDecoder` trait to abstract base class
+- Preserved conditional module declarations for h263, vp6, and screen decoders
+
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
