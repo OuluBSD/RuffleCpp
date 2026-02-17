@@ -16,6 +16,6 @@ Translate the Rust file `tests/framework/src/options/font.rs` to C++ without che
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
