@@ -16,6 +16,6 @@ Translate the Rust file `web/src/ui.rs` to C++ without checking anything initial
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
