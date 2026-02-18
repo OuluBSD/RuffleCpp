@@ -16,6 +16,16 @@ Translate the Rust file `core/src/avm1/globals.rs` to C++ without checking anyth
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated SystemPrototypes struct for system builtin classes
+- Translated global function implementations: escape, unescape, parseInt, parseFloat, trace
+- Translated isFinite, isNaN, getInfinity, getNaN functions
+- Translated setInterval, setTimeout, clearInterval, updateAfterEvent timer functions
+- Translated getDepth and remove_display_object for display objects
+- Defined AVM_DEPTH_BIAS, AVM_MAX_DEPTH, AVM_MAX_REMOVE_DEPTH constants
+- Implemented method dispatcher for global functions
+- Template pattern for GC types

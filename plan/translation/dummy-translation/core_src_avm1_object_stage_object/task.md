@@ -16,6 +16,18 @@ Translate the Rust file `core/src/avm1/object/stage_object.rs` to C++ without ch
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated get_property() for DisplayObject property lookup
+- Translated notify_property_change() for text field bindings
+- Translated has_display_object_property() for property existence check
+- Translated enumerate_keys() for key enumeration
+- Translated DisplayProperty class for property getter/setter pairs
+- Translated DisplayPropertyMap class for property map
+- Implemented all display property getters/setters (_x, _y, _xscale, _yscale, etc.)
+- Implemented resolve_path_property() for path resolution (_root, _parent, _levelN)
+- Implemented property_coerce_to_number() helper
+- Implemented action_property_coerce() for SetProperty coercion
