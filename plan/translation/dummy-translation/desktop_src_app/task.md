@@ -16,6 +16,21 @@ Translate the Rust file `desktop/src/app.rs` to C++ without checking anything in
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Translated App class for desktop application lifecycle management
+- Translated MainWindow struct for main window state and event handling
+- Implemented LoadingState enum for tracking load progress
+- Implemented window_event() for handling winit window events
+- Implemented on_metadata() for SWF metadata handling and window resizing
+- Implemented about_to_wait() for core game loop and gamepad input
+- Implemented check_redraw() for render scheduling
+- Added helper function declarations for input conversion
+- Added helper function declarations for screen size and profiling
+- Used winit for windowing and event handling
+- Used gilrs for gamepad support
+- Used tokio for async runtime
+- Used fontdb for font management
