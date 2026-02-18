@@ -16,6 +16,16 @@ Translate the Rust file `video/software/src/decoder/h263.rs` to C++ without chec
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Created `video/software/src/decoder/h263.h` (123 lines Rust -> ~100 lines C++)
+- Translated H263Decoder class for H.263/Sorenson Spark video decoding
+- Translated H263Error enum for decoder error handling
+- Implemented preload_frame() for determining frame dependencies
+- Implemented decode_frame() for decoding video frames
+- Supports deblocking filter with configurable strength
+- Uses h263_rs library for H.263 decoding
+- Added proper forward declarations for all dependencies

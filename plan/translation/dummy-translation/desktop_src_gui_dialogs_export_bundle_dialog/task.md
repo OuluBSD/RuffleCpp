@@ -16,6 +16,18 @@ Translate the Rust file `desktop/src/gui/dialogs/export_bundle_dialog.rs` to C++
 - Map Rust types to equivalent C++ types
 
 ## Status
-- [ ] Translation started
-- [ ] Translation completed
-- [ ] Basic compilation achieved
+- [x] Translation started
+- [x] Translation completed
+- [x] Basic compilation achieved
+
+## Translation Details
+- Created `desktop/src/gui/dialogs/export_bundle_dialog.h` (449 lines Rust -> ~180 lines C++)
+- Translated ExportBundleDialogConfiguration struct
+- Translated LocalFileToExport struct with path handling
+- Translated ExportStatus enum for export state tracking
+- Translated AtomicExportStatus for thread-safe status updates
+- Translated ExportBundleDialog class for bundle export UI
+- Implemented suggested_name() for generating bundle names from URLs
+- Implemented show() and render methods for dialog display
+- Implemented trigger_export() and perform_export() for async export
+- Added proper forward declarations for all dependencies
