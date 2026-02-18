@@ -1,0 +1,498 @@
+// C++ translation of core/src/bitmap/bitmap_data.rs
+//! BitmapData implementation for bitmap manipulation
+
+#ifndef RUFFLE_CORE_BITMAP_BITMAP_DATA_H
+#define RUFFLE_CORE_BITMAP_BITMAP_DATA_H
+
+#include <vector>
+#include <cstdint>
+#include <memory>
+#include <optional>
+#include <array>
+#include <functional>
+
+// Forward declarations
+namespace ruffle {
+namespace core {
+
+namespace avm2 {
+    template<typename GC>
+    class Activation;
+    template<typename GC>
+    class Error;
+    template<typename GC>
+    class BitmapDataObject;
+}
+
+namespace display_object {
+    template<typename GC>
+    class DisplayObject;
+    template<typename GC>
+    class DisplayObjectWeak;
+    template<typename GC>
+    class BoundsMode;
+}
+
+namespace context {
+    template<typename GC>
+    class RenderContext;
+}
+
+namespace bitmap {
+    class PixelRegion;
+    enum class PixelSnapping;
+}
+
+} // namespace core
+
+namespace render {
+namespace backend {
+    class RenderBackend;
+}
+namespace bitmap {
+    class Bitmap;
+    enum class BitmapFormat;
+    class BitmapHandle;
+    class SyncHandle;
+}
+namespace commands {
+    template<typename GC>
+    class CommandHandler;
+}
+} // namespace render
+
+namespace swf {
+    struct Rectangle;
+    class Twips;
+}
+
+namespace gc_arena {
+    template<typename T>
+    class Gc;
+    template<typename GC>
+    class Mutation;
+    namespace lock {
+        template<typename GC>
+        class GcRefLock;
+    }
+}
+
+} // namespace ruffle
+
+namespace ruffle {
+namespace core {
+namespace bitmap {
+
+using gc_arena::Gc;
+using gc_arena::Mutation;
+using gc_arena::lock::GcRefLock;
+
+// ============================================================================
+// LehmerRng - Park-Miller random number generator
+// ============================================================================
+
+/// An implementation of the Lehmer/Park-Miller random number generator
+/// Uses the fixed parameters m = 2,147,483,647 and a = 16,807
+class LehmerRng {
+private:
+    uint32_t x_;
+
+public:
+    explicit LehmerRng(uint32_t seed) : x_(seed) {}
+
+    /// Generate the next value in the sequence via the following formula
+    /// X_(k+1) = a * X_k mod m
+    uint32_t random() {
+        x_ = static_cast<uint32_t>((static_cast<uint64_t>(x_) * 16807) % 2147483647);
+        return x_;
+    }
+
+    uint8_t random_range(std::pair<uint8_t, uint8_t> range) {
+        return range.first + static_cast<uint8_t>(random() % (static_cast<uint32_t>(range.second - range.first) + 1));
+    }
+};
+
+// ============================================================================
+// Color - ARGB color value
+// ============================================================================
+
+/// This can represent both a premultiplied and an unmultiplied ARGB color value.
+///
+/// Note that most operations only make sense on one of these representations:
+/// For example, blending on premultiplied values, and applying a ColorTransform on
+/// unmultiplied values. Make sure to convert the color to the correct form beforehand.
+struct Color {
+    // Note: even though AS2/AS3 represent colors as (little-endian) BGRA u32s, this is stored
+    // in RGBA order to be compatible with what the render backend expects.
+    uint8_t r, g, b, a;
+
+    Color() : r(0), g(0), b(0), a(0) {}
+    Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a) : r(r), g(g), b(b), a(a) {}
+
+    static Color rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+        return Color(r, g, b, a);
+    }
+
+    static Color bgra_u32(uint32_t bgra) {
+        std::array<uint8_t, 4> bytes;
+        bytes[0] = static_cast<uint8_t>(bgra & 0xFF);
+        bytes[1] = static_cast<uint8_t>((bgra >> 8) & 0xFF);
+        bytes[2] = static_cast<uint8_t>((bgra >> 16) & 0xFF);
+        bytes[3] = static_cast<uint8_t>((bgra >> 24) & 0xFF);
+        return Color(bytes[2], bytes[1], bytes[0], bytes[3]);
+    }
+
+    uint32_t to_bgra_u32() const {
+        return static_cast<uint32_t>(b) |
+               (static_cast<uint32_t>(g) << 8) |
+               (static_cast<uint32_t>(r) << 16) |
+               (static_cast<uint32_t>(a) << 24);
+    }
+
+    uint8_t blue() const { return b; }
+    uint8_t green() const { return g; }
+    uint8_t red() const { return r; }
+    uint8_t alpha() const { return a; }
+
+    Color to_premultiplied_alpha(bool transparency) const {
+        // This has some accuracy issues with some alpha values
+        uint8_t old_alpha = transparency ? a : 255;
+        uint32_t alpha_val = old_alpha;
+        uint8_t premul_r = static_cast<uint8_t>((static_cast<uint32_t>(r) * alpha_val + 127) / 255);
+        uint8_t premul_g = static_cast<uint8_t>((static_cast<uint32_t>(g) * alpha_val + 127) / 255);
+        uint8_t premul_b = static_cast<uint8_t>((static_cast<uint32_t>(b) * alpha_val + 127) / 255);
+        return Color(premul_r, premul_g, premul_b, old_alpha);
+    }
+
+    Color to_un_multiplied_alpha() const {
+        // We need to match Flash's results, and this lookup table was generated by brute force.
+        static const uint32_t FLASH_PREMUL_FACTOR[256] = {
+            0, 16678912, 8339456, 5559638, 4169728, 3335783, 2779819, 2386603, 2086230, 1855488,
+            1667892, 1518251, 1391151, 1285234, 1193302, 1111928, 1043895, 981113, 927744, 879275,
+            834621, 795535, 759126, 726358, 695839, 668183, 642538, 618737, 596651, 576171, 555964,
+            538706, 522104, 506319, 490557, 477321, 464038, 451353, 439544, 428244, 417582, 407500,
+            397768, 388535, 379630, 371117, 363179, 355235, 348050, 340965, 334052, 327038, 321269,
+            315077, 309159, 303586, 298189, 293092, 287981, 283080, 278251, 273892, 269268, 265179,
+            261087, 256971, 253160, 249322, 245508, 242164, 238575, 235245, 231859, 228848, 225785,
+            222712, 219616, 216827, 213985, 211432, 208835, 206075, 203750, 201196, 198895, 196223,
+            194301, 191987, 189686, 187636, 185559, 183426, 181453, 179444, 177638, 175855, 174054,
+            171948, 170489, 168695, 166889, 165365, 163519, 162045, 160508, 158970, 157429, 156150,
+            154610, 153081, 151803, 150511, 148986, 147709, 146420, 145116, 143868, 142586, 141545,
+            140277, 139194, 137957, 136954, 135676, 134652, 133621, 132604, 131577, 130552, 129527,
+            128508, 127476, 126451, 125432, 124670, 123645, 122818, 121847, 121082, 120060, 119288,
+            118263, 117502, 116720, 115967, 115195, 114424, 113655, 112893, 112125, 111356, 110563,
+            109811, 109048, 108287, 107766, 107004, 106236, 105724, 104953, 104434, 103676, 102904,
+            102375, 101879, 101119, 100604, 99834, 99321, 98813, 98112, 97533, 97019, 96509, 95994,
+            95486, 94713, 94185, 93689, 93179, 92667, 92149, 91643, 91129, 90621, 90068, 89597,
+            89342, 88829, 88318, 87804, 87294, 87034, 86523, 85994, 85499, 85245, 84732, 84222,
+            83956, 83450, 82937, 82685, 82173, 81840, 81405, 80889, 80638, 80127, 79862, 79354,
+            79103, 78590, 78332, 78077, 77565, 77308, 76795, 76541, 76284, 75766, 75518, 75262,
+            74748, 74493, 74238, 73691, 73470, 73214, 72959, 72447, 72189, 71935, 71671, 71166,
+            70911, 70651, 70399, 70140, 69886, 69615, 69116, 68861, 68603, 68350, 68093, 67839,
+            67576, 67326, 67070, 66813, 66556, 66302, 66046, 65791, 65408
+        };
+
+        uint32_t alpha_factor = FLASH_PREMUL_FACTOR[a];
+        auto unmultiply = [alpha_factor](uint8_t c) -> uint8_t {
+            return static_cast<uint8_t>((static_cast<uint32_t>(c) * alpha_factor + 0x8000) >> 16);
+        };
+
+        return Color(unmultiply(r), unmultiply(g), unmultiply(b), a);
+    }
+
+    Color with_alpha(uint8_t new_alpha) const {
+        return Color(r, g, b, new_alpha);
+    }
+
+    /// Blend over another color (both must be in premultiplied form)
+    Color blend_over(const Color& source) const {
+        uint8_t sa = source.a;
+        uint8_t r = source.r + static_cast<uint8_t>((static_cast<uint16_t>(this->r) * (255 - sa)) / 255);
+        uint8_t g = source.g + static_cast<uint8_t>((static_cast<uint16_t>(this->g) * (255 - sa)) / 255);
+        uint8_t b = source.b + static_cast<uint8_t>((static_cast<uint16_t>(this->b) * (255 - sa)) / 255);
+        uint8_t a = source.a + static_cast<uint8_t>((static_cast<uint16_t>(this->a) * (255 - sa)) / 255);
+        return Color(r, g, b, a);
+    }
+
+    static const uint8_t* slice_as_rgba(const std::vector<Color>& slice) {
+        return reinterpret_cast<const uint8_t*>(slice.data());
+    }
+};
+
+// ============================================================================
+// ChannelOptions bitflags
+// ============================================================================
+
+enum class ChannelOptions : uint8_t {
+    None = 0,
+    Red = 1 << 0,
+    Green = 1 << 1,
+    Blue = 1 << 2,
+    Alpha = 1 << 3,
+    Rgb = Red | Green | Blue
+};
+
+inline ChannelOptions operator|(ChannelOptions a, ChannelOptions b) {
+    return static_cast<ChannelOptions>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
+}
+
+inline ChannelOptions operator&(ChannelOptions a, ChannelOptions b) {
+    return static_cast<ChannelOptions>(static_cast<uint8_t>(a) & static_cast<uint8_t>(b));
+}
+
+// ============================================================================
+// BitmapDataDrawError
+// ============================================================================
+
+enum class BitmapDataDrawError {
+    Unimplemented
+};
+
+// ============================================================================
+// DirtyState
+// ============================================================================
+
+enum class DirtyStateType {
+    Clean,
+    CpuModified,
+    GpuModified
+};
+
+struct DirtyState {
+    DirtyStateType type;
+    std::optional<PixelRegion> region;
+    std::shared_ptr<void> sync_handle;  // Type-erased SyncHandle
+
+    static DirtyState clean() {
+        return DirtyState{DirtyStateType::Clean, std::nullopt, nullptr};
+    }
+
+    static DirtyState cpu_modified(PixelRegion region) {
+        return DirtyState{DirtyStateType::CpuModified, std::make_optional(region), nullptr};
+    }
+
+    static DirtyState gpu_modified(std::shared_ptr<void> sync_handle, PixelRegion region) {
+        return DirtyState{DirtyStateType::GpuModified, std::make_optional(region), sync_handle};
+    }
+};
+
+// ============================================================================
+// BitmapRawData
+// ============================================================================
+
+template<typename GC>
+struct BitmapRawData {
+    /// The pixels in the bitmap, stored as an array of pre-multiplied ARGB colour values
+    std::vector<Color> pixels;
+
+    uint32_t width;
+    uint32_t height;
+    bool transparency;
+
+    // Note that it's technically possible to have a BitmapData with zero width and height,
+    // (by embedding it in the SWF instead of using the BitmapData constructor),
+    // so we need a separate 'disposed' flag.
+    bool disposed;
+
+    /// The bitmap handle for this data.
+    /// This is lazily initialized; a value of std::nullopt indicates that
+    /// initialization has not yet happened.
+    std::optional<render::bitmap::BitmapHandle> bitmap_handle;
+
+    /// The AVM2 side of this BitmapData.
+    avm2::BitmapDataObject<GC> avm2_object;
+
+    /// A list of display objects that are backed by this BitmapData
+    std::vector<display_object::DisplayObjectWeak<GC>> display_objects;
+
+    DirtyState dirty_state;
+
+    /// Holds an egui texture handle, used for rendering this Bitmap in the debug ui.
+    /// This is automatically set to std::nullopt when the texture is updated.
+#ifdef RUFFLE_EGUI
+    std::optional<void*> egui_texture;  // Type-erased egui::TextureHandle
+#endif
+
+    BitmapRawData()
+        : width(0), height(0), transparency(false), disposed(false) {}
+
+    bool is_point_in_bounds(int32_t x, int32_t y) const {
+        return x >= 0 && x < static_cast<int32_t>(width) && y >= 0 && y < static_cast<int32_t>(height);
+    }
+
+    void dispose() {
+        width = 0;
+        height = 0;
+        pixels.clear();
+        bitmap_handle = std::nullopt;
+        dirty_state = DirtyState::clean();
+        disposed = true;
+    }
+
+    const std::vector<Color>& pixels() const { return pixels; }
+    const uint8_t* pixels_rgba() const { return Color::slice_as_rgba(pixels); }
+    uint32_t width() const { return width; }
+    uint32_t height() const { return height; }
+    bool is_transparent() const { return transparency; }
+    bool is_disposed() const { return disposed; }
+
+    avm2::BitmapDataObject<GC> object2() const { return avm2_object; }
+
+    void set_pixel32_raw(uint32_t x, uint32_t y, Color color) {
+        pixels[x + y * width] = color;
+    }
+
+    void set_pixel32_row_raw(uint32_t x1, uint32_t x2, uint32_t y, Color color) {
+        std::fill(pixels.begin() + (x1 + y * width), pixels.begin() + (x2 + y * width), color);
+    }
+
+    void fill(Color color) {
+        std::fill(pixels.begin(), pixels.end(), color);
+    }
+
+    Color get_pixel32_raw(uint32_t x, uint32_t y) const {
+        return pixels[x + y * width];
+    }
+
+    std::vector<Color>& raw_pixels_mut() { return pixels; }
+    const std::vector<Color>& raw_pixels() const { return pixels; }
+};
+
+// ============================================================================
+// BitmapData
+// ============================================================================
+
+template<typename GC>
+class BitmapData {
+private:
+    GcRefLock<GC, BitmapRawData<GC>> data_;
+
+public:
+    BitmapData(GcRefLock<GC, BitmapRawData<GC>> data) : data_(data) {}
+
+    static BitmapData<GC> create(
+        Mutation<GC>* mc,
+        uint32_t width,
+        uint32_t height,
+        bool transparency,
+        uint32_t fill_color
+    );
+
+    static BitmapData<GC> create_with_pixels(
+        Mutation<GC>* mc,
+        uint32_t width,
+        uint32_t height,
+        bool transparency,
+        std::vector<Color> pixels
+    );
+
+    static BitmapData<GC> dummy(Mutation<GC>* mc);
+
+    BitmapData<GC> clone_data(Mutation<GC>* mc, render::backend::RenderBackend* renderer);
+
+    GcRefLock<GC, BitmapRawData<GC>> sync(render::backend::RenderBackend* renderer);
+
+    render::bitmap::BitmapHandle bitmap_handle(
+        Mutation<GC>* mc,
+        render::backend::RenderBackend* renderer
+    );
+
+    std::pair<GcRefLock<GC, BitmapRawData<GC>>, std::optional<PixelRegion>>
+    overwrite_cpu_pixels_from_gpu(Mutation<GC>* mc);
+
+    void render(
+        bool smoothing,
+        context::RenderContext<GC>* context,
+        PixelSnapping pixel_snapping
+    );
+
+    uint32_t height() const;
+    uint32_t width() const;
+
+    avm2::BitmapDataObject<GC> object2() const;
+    bool disposed() const;
+    bool transparency() const;
+
+    void check_valid(avm2::Activation<GC>* activation);
+    void dispose(Mutation<GC>* mc);
+    void init_object2(Mutation<GC>* mc, avm2::BitmapDataObject<GC> object);
+
+    void remove_display_object(Mutation<GC>* mc, display_object::DisplayObjectWeak<GC> callback);
+    void add_display_object(Mutation<GC>* mc, display_object::DisplayObjectWeak<GC> callback);
+
+    bool can_read(PixelRegion read_area) const;
+    bool is_point_in_bounds(int32_t x, int32_t y) const;
+    bool ptr_eq(const BitmapData<GC>& other) const;
+
+#ifdef RUFFLE_EGUI
+    std::string debug_sync_status() const;
+#endif
+};
+
+// ============================================================================
+// IBitmapDrawable
+// ============================================================================
+
+template<typename GC>
+class IBitmapDrawable {
+public:
+    enum class Type {
+        BitmapData,
+        DisplayObject
+    };
+
+private:
+    Type type_;
+    std::optional<BitmapData<GC>> bitmap_data_;
+    std::optional<display_object::DisplayObject<GC>> display_object_;
+
+public:
+    explicit IBitmapDrawable(BitmapData<GC> bmd)
+        : type_(Type::BitmapData), bitmap_data_(std::move(bmd)) {}
+
+    explicit IBitmapDrawable(display_object::DisplayObject<GC> obj)
+        : type_(Type::DisplayObject), display_object_(std::move(obj)) {}
+
+    swf::Rectangle bounds() const;
+};
+
+// ============================================================================
+// ThresholdOperation
+// ============================================================================
+
+enum class ThresholdOperation {
+    Equals,
+    NotEquals,
+    LessThan,
+    LessThanOrEquals,
+    GreaterThan,
+    GreaterThanOrEquals
+};
+
+inline std::optional<ThresholdOperation> threshold_operation_from_string(const std::string& str) {
+    if (str == "==") return ThresholdOperation::Equals;
+    if (str == "!=") return ThresholdOperation::NotEquals;
+    if (str == "<") return ThresholdOperation::LessThan;
+    if (str == "<=") return ThresholdOperation::LessThanOrEquals;
+    if (str == ">") return ThresholdOperation::GreaterThan;
+    if (str == ">=") return ThresholdOperation::GreaterThanOrEquals;
+    return std::nullopt;
+}
+
+inline bool threshold_operation_matches(ThresholdOperation op, uint32_t value, uint32_t masked_threshold) {
+    switch (op) {
+        case ThresholdOperation::Equals: return value == masked_threshold;
+        case ThresholdOperation::NotEquals: return value != masked_threshold;
+        case ThresholdOperation::LessThan: return value < masked_threshold;
+        case ThresholdOperation::LessThanOrEquals: return value <= masked_threshold;
+        case ThresholdOperation::GreaterThan: return value > masked_threshold;
+        case ThresholdOperation::GreaterThanOrEquals: return value >= masked_threshold;
+    }
+    return false;
+}
+
+} // namespace bitmap
+} // namespace core
+} // namespace ruffle
+
+#endif // RUFFLE_CORE_BITMAP_BITMAP_DATA_H
