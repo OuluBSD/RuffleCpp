@@ -16,3 +16,13 @@ RECOVER_*.fla
 
 # Mac junk
 .DS_Store
+.kilo/
+build/
+tmp/
+cmake/*_backend.h
+cmake/*_display_object.h
+cmake/*.h
+core/src/limits.h
+core/src/locale.h
+swf/src/error.h
+video/src/error.h
